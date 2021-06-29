@@ -12,6 +12,7 @@ use PhpPact\Standalone\Installer\Exception\NoDownloaderFoundException;
 use PhpPact\Standalone\Installer\InstallManager;
 use PhpPact\Standalone\Installer\Service\InstallerInterface;
 use PhpPact\Standalone\ProviderVerifier\Model\VerifierConfigInterface;
+use GuzzleHttp\Psr7\Uri;
 
 /**
  * Wrapper for the Ruby Standalone Verifier service.
@@ -210,6 +211,19 @@ class Verifier
         $arguments = \array_merge($arguments, $this->getArguments());
 
         $this->verifyAction($arguments);
+    }
+
+    /**
+     * @param string $url - the permalink for the pact contract
+     */
+    public function verifyByFullUrl(string $fullUrl){
+        $uri = new Uri($fullUrl);
+
+        $arguments = \array_merge([$uri->__toString()], $this->getArguments());
+
+        $this->verifyAction($arguments);
+
+        return $this;
     }
 
     /**
