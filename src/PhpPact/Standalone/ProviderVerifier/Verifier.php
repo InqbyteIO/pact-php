@@ -300,4 +300,9 @@ class Verifier
 
         return $this->brokerHttpClient;
     }
+
+    public function contractExists(string $tag) {
+        $urls = $this->getBrokerHttpClient()->getAllConsumerUrlsForTag($this->config->getProviderName(), $tag);
+        return count($urls) > 0;
+    }
 }
