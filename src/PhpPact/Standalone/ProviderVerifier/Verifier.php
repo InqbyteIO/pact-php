@@ -126,6 +126,14 @@ class Verifier
             $parameters[] = "--include-wip-pacts-since={$this->config->getIncludeWipPactSince()}";
         }
 
+        if ($this->config->getBrokerUri() !== null) {
+            $parameters[] = "--pact-broker-base-url={$this->config->getBrokerUri()}";
+        }
+
+        if ($this->config->getProviderName() !== null) {
+            $parameters[] = "--provider={$this->config->getProviderName()}";
+        }
+
         return $parameters;
     }
 
@@ -223,6 +231,14 @@ class Verifier
 
         $this->verifyAction($arguments);
 
+        return $this;
+    }
+
+    public function verifyDynamic(){
+        $arguments = $this->getArguments();
+
+        $this ->verifyAction($arguments);
+        
         return $this;
     }
 
