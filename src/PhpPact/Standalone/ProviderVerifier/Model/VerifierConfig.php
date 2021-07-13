@@ -15,7 +15,7 @@ class VerifierConfig implements VerifierConfigInterface
     /** @var null|string */
     private $providerStatesSetupUrl;
 
-    /** @var string */
+    /** @var null|string */
     private $providerName;
 
     /** @var string */
@@ -105,7 +105,7 @@ class VerifierConfig implements VerifierConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function getProviderName(): string
+    public function getProviderName()
     {
         return $this->providerName;
     }
